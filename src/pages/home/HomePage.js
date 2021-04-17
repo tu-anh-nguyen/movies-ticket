@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Box from "@material-ui/core/Box";
+import {Box, Container} from "@material-ui/core";
 
 import NavHeader from "../../components/header/NavHeader";
 import MyCarousel from "../../components/carousel/MyCarousel";
-
+import MovieList from '../../components/movie-list'
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -47,10 +47,11 @@ export default class HomePage extends Component {
         />
         <Box marginTop="60px"></Box>
         <MyCarousel />
-        <Box
-          id="lich-chieu"
-          style={{ height: "1000px", backgroundColor: "red", opacity: "0.3" }}
-        ></Box>
+        <Box marginTop="100px">
+        <Container maxWidth="md" >
+          <MovieList/>
+        </Container>
+        </Box>
         <Box
           id="cum-rap"
           style={{
