@@ -12,10 +12,14 @@
     "bootstrap": "^4.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-i18n": "^1.0.1",
+    "react-player": "^2.9.0",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-slick": "^0.28.1",
     "reactstrap": "^8.9.0",
+    "slick-carousel": "^1.8.1",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
@@ -53,5 +57,10 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.23.2",
+    "prettier": "^2.2.1"
   }
 }

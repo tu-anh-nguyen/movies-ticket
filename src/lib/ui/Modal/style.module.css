@@ -1,0 +1,26 @@
+.modal-content {
+    margin: 8px;
+}
+.modal-content .modal-header {
+    height: 50px;
+    text-align: center;
+    position: relative;
+}
+.modal-content .modal-header .modal-close-icon {
+    text-align: center;
+    right: 0px;
+    top: 0px;
+    padding: 8px;
+    position: absolute;
+    cursor: pointer;
+    font-size: xx-small;
+    transition: step-start;
+}
+.modal-content .modal-header .modal-title {
+    font-weight: bold;
+    font-size: x-large;
+}
+.modal-footer {
+    padding: 15px;
+    text-align: center;
+}
