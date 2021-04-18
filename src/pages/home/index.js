@@ -5,6 +5,7 @@ import NavHeader from '../../components/header';
 import MyCarousel from '../../components/carousel';
 import HomeTool from '../../components/home-tool';
 import MovieList from '../../components/movie-list';
+import Footer from '../../components/footer';
 
 export default function HomePage() {
 	const [currentLocation, setCurrentLocation] = React.useState('Hồ Chí Minh');
@@ -23,7 +24,7 @@ export default function HomePage() {
 			<Box position='relative'>
 				<HomeTool />
 			</Box>
-			<Box id='lich-chieu' paddingTop='100px'>
+			<Box id='lich-chieu'>
 				<Container maxWidth='md'>
 					<MovieList />
 				</Container>
@@ -40,10 +41,11 @@ export default function HomePage() {
 				id='tin-tuc'
 				style={{ height: '1000px', backgroundColor: 'green', opacity: '0.3' }}
 			></Box>
-			<Box
-				id='ung-dung'
-				style={{ height: '1000px', backgroundColor: 'blue', opacity: '0.3' }}
-			></Box>
+			<Box id='ung-dung' css={{ backgroundColor: '#222222' }}>
+				<Container maxWidth='md'>
+					<Footer />
+				</Container>
+			</Box>
 		</Box>
 	);
 }

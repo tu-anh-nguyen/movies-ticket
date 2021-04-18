@@ -287,29 +287,24 @@ const list = [
 ];
 
 const MovieList = (data = list, nowShowing = true) => {
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    arrows: true,
-    rows: 2,
-    slidesPerRow: 4,
-    slidesToScroll: 1,
-    nextArrow: <SamplePrevArrow />,
-    prevArrow: <SamplePrevArrow />,
-  };
-  return (
-    <div style={{margin: '0 auto', width: '95%'}}>
-      <Slider {...settings}>
-        {renderList(list, nowShowing)}
-      </Slider>
-    </div>
-  );
-
-
-}
+	const settings = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		arrows: true,
+		rows: 2,
+		slidesPerRow: 4,
+		slidesToScroll: 1,
+		nextArrow: <SamplePrevArrow />,
+		prevArrow: <SamplePrevArrow />,
+	};
+	return (
+		<div style={{ margin: '0 auto', width: '90%' }}>
+			<Slider {...settings}>{renderList(list, nowShowing)}</Slider>
+		</div>
+	);
+};
 export default MovieList;
 MovieList.propTypes = {
 	data: PropTypes.arrayOf(PropTypes.object),
