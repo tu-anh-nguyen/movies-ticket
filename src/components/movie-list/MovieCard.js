@@ -167,22 +167,6 @@ const useStyle = makeStyles(() => ({
 	},
 }));
 
-const renderStar = (star) => {
-	const a = Math.floor(star / 2);
-	const b = star % 2 ? true : false;
-	const arr = new Array(a).fill('a');
-	return (
-		<div style={{ fontSize: '0.5em' }}>
-			<>
-				{arr.map((element, index) => (
-					<span key={index}>⭐</span>
-				))}
-				{b && <span>½</span>}
-			</>
-		</div>
-	);
-};
-
 const RenderMovieCard = (
 	{ maPhim, tenPhim, trailer, ngayKhoiChieu, hinhAnh, danhGia },
 	dangChieu = true

@@ -1,5 +1,12 @@
 import React from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import {
+	Container,
+	Grid,
+	Hidden,
+	Typography,
+	useMediaQuery,
+	useTheme,
+} from '@material-ui/core';
 import './style.scss';
 import { Divider } from '../../lib/ui';
 
@@ -73,25 +80,27 @@ const renderApp = () => {
 			<Grid container>
 				<Typography className='white title'>Ứng dụng</Typography>
 			</Grid>
-			<Grid container alignItems='center' spacing={3}>
-				<Grid item xs={6}>
-					<a href='/' title='Android'>
-						<img
-							src='/assets/img/footer/app/app-android.png'
-							alt='android'
-							className='app'
-						/>
-					</a>
-				</Grid>
-				<Grid item xs={6}>
-					<a href='/' title='IOS'>
-						<img
-							src='/assets/img/footer/app/app-ios.png'
-							alt='ios'
-							className='app'
-						/>
-					</a>
-				</Grid>
+			<Grid
+				container
+				alignItems='center'
+				justify='space-around'
+				className='spacing'
+				spacing={3}
+			>
+				<a href='/' title='Android'>
+					<img
+						src='/assets/img/footer/app/app-android.png'
+						alt='android'
+						className='app'
+					/>
+				</a>
+				<a href='/' title='IOS'>
+					<img
+						src='/assets/img/footer/app/app-ios.png'
+						alt='ios'
+						className='app'
+					/>
+				</a>
 			</Grid>
 		</>
 	);
@@ -102,7 +111,13 @@ const renderPartner = (list) => (
 		<Grid container>
 			<Typography className='white title'>ĐỐI TÁC</Typography>
 		</Grid>
-		<Grid container alignItems='center' justify='space-evenly' spacing={1}>
+		<Grid
+			container
+			alignItems='center'
+			className='spacing'
+			justify='space-evenly'
+			spacing={1}
+		>
 			{list?.map((item, index) => (
 				<Grid item xs={3} key={index}>
 					<a href={item.link} title={item.name}>
@@ -114,15 +129,19 @@ const renderPartner = (list) => (
 	</>
 );
 
-const renderAboutUs = () => {
+const renderAboutUs = (isBreak) => {
 	const date = new Date();
 	return (
 		<>
-			<Divider backgroundColor='chocolate' color='white' spacing={10}>
-				<Typography className='white head-about'>
-					COPYRIGHT © {date.getFullYear()} - Nulo.vn
-				</Typography>
-			</Divider>
+			{!isBreak ? (
+				<Divider backgroundColor='chocolate' color='white' spacing={10}>
+					<Typography className='white head-about'>
+						COPYRIGHT © {date.getFullYear()} - Nulo.vn
+					</Typography>
+				</Divider>
+			) : (
+				<Divider padding='0 0 2rem' margin='2rem 0 0' backgroundColor='grey' />
+			)}
 			<Typography variant='body2' align='center' className='white'>
 				{'Trụ sở chính: Tòa nhà Nulo Tower, 54 Nguyễn Thị Thập,  P.Tân Quy, Quận 7, Tp. Hồ Chí Minh, Việt Nam'.toUpperCase()}
 			</Typography>
@@ -130,7 +149,10 @@ const renderAboutUs = () => {
 				{'Giấy phép kinh doanh số: 6000-499-598'.toUpperCase()}
 			</Typography>
 			<Typography variant='body2' align='center' className='white'>
-				{'Tổng đài đặt vé: 19001722'.toUpperCase()}
+				{'Tổng đài đặt vé:'.toUpperCase()}{' '}
+				<a href='tel:19001722' className='a-white'>
+					<b>19001722</b>
+				</a>
 			</Typography>
 			<br />
 			<Typography
@@ -146,6 +168,11 @@ const renderAboutUs = () => {
 	);
 };
 const Footer = () => {
+	const theme = useTheme();
+	const isXsDown = useMediaQuery(theme.breakpoints.down('xs'));
+	const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
+	const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+
 	const list = [
 		{
 			name: 'BHD',
@@ -192,26 +219,24 @@ const Footer = () => {
 			src: '/assets/img/footer/partner/touch.png',
 			link: 'https://touchcinema.com/',
 		},
-		{
-			name: 'MegaGS',
-			src: '/assets/img/footer/partner/megags.png',
-			link: 'https://www.megagscinemas.vn/',
-		},
-		{
-			name: 'MegaGS',
-			src: '/assets/img/footer/partner/megags.png',
-			link: 'https://www.megagscinemas.vn/',
-		},
-		{
-			name: 'MegaGS',
-			src: '/assets/img/footer/partner/megags.png',
-			link: 'https://www.megagscinemas.vn/',
-		},
 	];
 	return (
 		<>
-			<Grid container spacing={10} alignItems='flex-start' className='spacing'>
-				<Grid item xs={12} md={6} lg={4} container>
+			<Grid
+				container
+				alignItems='flex-start'
+				spacing={isXsDown || 3}
+				justify='center'
+				className='spacing'
+			>
+				<Grid
+					item
+					xs={12}
+					sm={4}
+					lg={4}
+					container
+					justify={isSmDown && 'center'}
+				>
 					{renderCustomerService()}
 					<img
 						src='/assets/img/footer/dathongbao.png'
@@ -219,15 +244,18 @@ const Footer = () => {
 						className='da-thong-bao'
 					/>
 				</Grid>
-				<Grid item xs={12} md={6} lg={4} container>
+				<Hidden smDown>
+					<Grid item xs={12} sm={4} lg={4} container>
+						{renderPartner(list)}
+					</Grid>
+				</Hidden>
+
+				<Grid item xs={12} sm={4} lg={4} container>
 					{renderContantUs()}
 					{renderApp()}
 				</Grid>
-				<Grid item xs={12} md={6} lg={4} container>
-					{renderPartner(list)}
-				</Grid>
 			</Grid>
-			{renderAboutUs()}
+			{renderAboutUs(isMdDown)}
 		</>
 	);
 };

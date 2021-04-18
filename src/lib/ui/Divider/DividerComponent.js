@@ -13,6 +13,7 @@ function DividerComponent(props) {
 	} = props;
 	const useStyle = makeStyles(() => ({
 		root: {
+			width: '100%',
 			padding,
 			margin,
 		},
