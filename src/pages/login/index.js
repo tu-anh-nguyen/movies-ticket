@@ -184,7 +184,7 @@ export default function LoginPage() {
 					padding='20px 38px'
 				>
 					<Box className={classes.headerButton}>Đăng Nhập</Box>
-					<Link className={classes.headerButtonPrimary} to='/dang-ky/'>
+					<Link className={classes.headerButtonPrimary} to='/register/'>
 						Đăng Ký
 					</Link>
 				</Box>

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import RenderMovieCard from './MovieCard';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import MovieAction from '../../redux/action/movie';
 
 const renderList = (list, nowShowing = true) =>
-	list.map((item, index) => (
+	list?.map((item, index) => (
 		<div key={index}>{RenderMovieCard(item, nowShowing)}</div>
 	));
 renderList.propTypes = {
@@ -287,6 +289,12 @@ const list = [
 ];
 
 const MovieList = (data = list, nowShowing = true) => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(MovieAction.fetchList());
+	}, []);
+	const MovieList = useSelector((state) => state.movie.list);
+
 	const settings = {
 		dots: true,
 		infinite: true,
@@ -301,7 +309,9 @@ const MovieList = (data = list, nowShowing = true) => {
 	};
 	return (
 		<div style={{ margin: '0 auto', width: '90%' }}>
-			<Slider {...settings}>{renderList(list, nowShowing)}</Slider>
+			<Slider {...settings}>
+				{data.length > 0 && renderList(MovieList, nowShowing)}
+			</Slider>
 		</div>
 	);
 };

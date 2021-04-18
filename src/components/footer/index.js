@@ -224,7 +224,7 @@ const Footer = () => {
 			<Grid
 				container
 				alignItems='flex-start'
-				spacing={isXsDown || 3}
+				{...(isXsDown && { spacing: 3 })}
 				justify='center'
 				className='spacing'
 			>
@@ -234,7 +234,7 @@ const Footer = () => {
 					sm={4}
 					lg={4}
 					container
-					justify={isSmDown && 'center'}
+					{...(isSmDown && { justify: 'center' })}
 				>
 					{renderCustomerService()}
 					<img
