@@ -275,11 +275,11 @@ const MovieList = (data = list, nowShowing = true) => {
     prevArrow: <SamplePrevArrow />,
   };
   return (
-    <>
+    <div style={{margin: '0 auto', width: '95%'}}>
       <Slider {...settings}>
         {renderList(list, nowShowing)}
       </Slider>
-    </>
+    </div>
   );
 
 

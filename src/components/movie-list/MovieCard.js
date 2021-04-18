@@ -1,7 +1,9 @@
-import { makeStyles, Dialog, Modal, Typography, Zoom } from '@material-ui/core';
-import { Button } from '../../lib/ui'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
+import { makeStyles, Dialog, Typography, Zoom } from '@material-ui/core';
+import format from "date-format";
+import { Button } from '../../lib/ui';
 
 const useStyle = makeStyles(() => ({
     modal: {
@@ -10,7 +12,7 @@ const useStyle = makeStyles(() => ({
     trailerBox: {
         paddingTop: '56.25%',
         position: 'relative',
-        overflowY: 'unset !important'
+        overflowY: 'unset !important',
     },
     reactPlayer: {
         position: 'absolute',
@@ -70,21 +72,21 @@ const useStyle = makeStyles(() => ({
         zIndex: 3,
         padding: '5px 10px',
         margin: '5px auto',
-        backgroundColor: '#000000ff'
+        backgroundColor: '#000000ff',
     },
     overlayContent: {
-        padding: '10px',
-        display: 'block',
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        top: 0,
-        left: 0,
-        opacity: 0,
-        transition: 'all 0.5s',
+        'padding': '10px',
+        'display': 'block',
+        'position': 'absolute',
+        'width': '100%',
+        'height': '100%',
+        'top': 0,
+        'left': 0,
+        'opacity': 0,
+        'transition': 'all 0.5s',
         '&:hover': {
             opacity: 1,
-        }
+        },
     },
     topContent: {
         display: 'block',
@@ -95,10 +97,10 @@ const useStyle = makeStyles(() => ({
         backgroundRepeat: 'no-repeat, repeat-y',
     },
     bottomContent: {
-        display: 'block',
-        position: 'relative',
-        marginTop: '10px',
-        paddingTop: '25%',
+        'display': 'block',
+        'position': 'relative',
+        'marginTop': '10px',
+        'paddingTop': '25%',
         '& Button': {
             position: 'absolute',
             height: '100%',
@@ -117,16 +119,17 @@ const useStyle = makeStyles(() => ({
         transition: 'all 0.5s',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
+        textAlign: 'center',
         overflow: 'hidden',
     },
     imgContent: {
-        display: 'block',
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        overflow: 'hidden',
-        top: 0,
-        left: 0,
+        'display': 'block',
+        'position': 'absolute',
+        'width': '100%',
+        'height': '100%',
+        'overflow': 'hidden',
+        'top': 0,
+        'left': 0,
         '& img': {
             margin: '0 auto',
             height: '100%',
@@ -144,15 +147,15 @@ const useStyle = makeStyles(() => ({
         left: '0',
     },
     playIcon: {
-        transition: 'all 0.5s',
-        height: 'auto',
-        width: '30%',
-        top: '50%',
-        left: '50%',
-        position: 'absolute',
-        transform: 'translate(-50%, -50%)',
-        display: 'block',
-        margin: 'auto',
+        'transition': 'all 0.5s',
+        'height': 'auto',
+        'width': '30%',
+        'top': '50%',
+        'left': '50%',
+        'position': 'absolute',
+        'transform': 'translate(-50%, -50%)',
+        'display': 'block',
+        'margin': 'auto',
         '&:hover': {
             cursor: 'pointer',
             opacity: 0.8,
@@ -160,28 +163,31 @@ const useStyle = makeStyles(() => ({
     },
     filmStats: {
         fontWeight: 300,
-        letterSpacing: '1.5px'
-    }
-
-}))
-
+        letterSpacing: '1.5px',
+    },
+}));
 
 
-const RenderMovieCard = ({ maPhim, tenPhim, biDanh, trailer, hinhAnh, moTa, maNhom, ngayKhoiChieu, danhGia }, dangChieu = true) => {
+const RenderMovieCard = ({
+    maPhim,
+    tenPhim,
+    trailer,
+    ngayKhoiChieu,
+    hinhAnh,
+    danhGia }, dangChieu = true) => {
     const classes = useStyle();
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
     const handleClose = () => {
-        setOpen(false)
-    }
+        setOpen(false);
+    };
 
-    const renderCredit = (star) => {
+    const renderCredit = () => {
         // const rand = star % 3;
-        const rand = Math.floor(Math.random() * 4) + 1
-        console.log({ rand });
-        if (rand === 1) return <div className={classes.blockbuster} />
-        if (rand === 2) return <div className={classes.sale} />
-        if (rand === 3) return <div className={classes.earlyBird} />
-    }
+        const rand = Math.floor(Math.random() * 4) + 1;
+        if (rand === 1) return <div className={classes.blockbuster} />;
+        if (rand === 2) return <div className={classes.sale} />;
+        if (rand === 3) return <div className={classes.earlyBird} />;
+    };
 
     const renderStar = (star) => {
         const a = Math.floor(star / 2);
@@ -189,13 +195,13 @@ const RenderMovieCard = ({ maPhim, tenPhim, biDanh, trailer, hinhAnh, moTa, maNh
         const arr = new Array(a).fill('a');
         return (
             <div style={{ fontSize: '0.5em' }}>
-                <>
+                <div>
                     {arr.map((element, index) => <span key={index}>⭐</span>)}
                     {b && <span>½</span>}
-                </>
+                </div>
             </div>
-        )
-    }
+        );
+    };
     return (
         <>
             <Dialog
@@ -218,7 +224,6 @@ const RenderMovieCard = ({ maPhim, tenPhim, biDanh, trailer, hinhAnh, moTa, maNh
                     />
                 </div>
             </Dialog>
-
             <div className={classes.root}>
                 {renderCredit(danhGia)}
                 <div className={classes.star}>
@@ -232,18 +237,23 @@ const RenderMovieCard = ({ maPhim, tenPhim, biDanh, trailer, hinhAnh, moTa, maNh
                         </div>
                     </div>
                     <div className={classes.bottomContent} >
-                        <Typography className={classes.Typography}>
+                        <div className={classes.Typography}>
                             {tenPhim}
-                            <Typography component="p" variant="caption" className={classes.filmStats}>
-                                {danhGia} IMDb
-                        </Typography>
-                        </Typography>
+                            <Typography
+                                component="p"
+                                variant="caption"
+                                className={classes.filmStats}>
+                                {format("dd-MM-yyyy", new Date(ngayKhoiChieu))}
+                            </Typography>
+                        </div>
                     </div>
                 </div>
                 <div className={classes.overlayContent}>
                     <div className={classes.topContent} >
                         <div className={classes.imgOverlayContent}>
-                            <img src='/assets/img/extend/play-button.svg' alt={maPhim} className={classes.playIcon} onClick={() => setOpen(true)} />
+                            <img src='/assets/img/extend/play-button.svg'
+                                alt={maPhim}
+                                className={classes.playIcon} onClick={() => setOpen(true)} />
                         </div>
                     </div>
                     {dangChieu && <div className={classes.bottomContent} >
@@ -253,12 +263,19 @@ const RenderMovieCard = ({ maPhim, tenPhim, biDanh, trailer, hinhAnh, moTa, maNh
                             onClick={() => setOpen(false)}
                         >
                             Đặt vé
-                    </Button>
+            </Button>
                     </div>}
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default RenderMovieCard;
+RenderMovieCard.propTypes = {
+    maPhim: PropTypes.string,
+    tenPhim: PropTypes.string,
+    trailer: PropTypes.string,
+    hinhAnh: PropTypes.string,
+    danhGia: PropTypes.string,
+};

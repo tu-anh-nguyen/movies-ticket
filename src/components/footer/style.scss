@@ -1,0 +1,47 @@
+.white {
+    color: white !important;
+}
+
+.a-white {
+    color: white;
+    // font-weight: 700;
+    &:hover {
+        color: white;
+    }
+}
+.img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 50%;
+    box-shadow: rgba(255, 255, 255, 0.397) 0px 1px 1px 0px inset, rgba(255, 255, 255, 0.198) 0px 50px 100px -20px, rgb(141, 136, 136) 0px 30px 60px -30px;
+    &:hover {
+        opacity: 0.5;
+    }
+}
+.app{
+    width: 100%;
+    height: auto;
+    &:hover {
+        opacity: 0.5;
+    }
+}
+.da-thong-bao {
+    width: 100%;
+    height: auto;
+    margin-top: 1.5rem;
+}
+
+.title {
+    font-weight: 700 !important;
+    padding-bottom: 1.5rem;
+    margin-top: 2rem !important;
+    text-transform: uppercase;
+}
+
+.head-about{
+    font-weight: 700;
+    font-size: 1.5rem !important;
+    padding: 1rem 0;
+    letter-spacing: 0.02px !important;
+}
