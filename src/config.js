@@ -1,10 +1,15 @@
-import { Home, Login, Register } from './pages';
+import { Detail, Home, Login, Register } from './pages';
 
 export const mainRouter = [
 	{
 		path: '/',
 		exact: true,
 		Component: Home,
+	},
+	{
+		path: '/movie/:movieId',
+		exact: true,
+		Component: Detail,
 	},
 ];
 export const adminRouter = [];

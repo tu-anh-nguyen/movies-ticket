@@ -6,8 +6,9 @@ import {
 	useMediaQuery,
 	useTheme,
 } from '@material-ui/core';
-import './style.scss';
 import { Divider } from '../../lib/ui';
+import { list } from './partner';
+import './style.scss';
 
 const renderCustomerService = () => (
 	<>
@@ -105,7 +106,7 @@ const renderApp = () => {
 	);
 };
 
-const renderPartner = (list) => (
+const renderPartner = () => (
 	<>
 		<Grid container>
 			<Typography className='white title'>ĐỐI TÁC</Typography>
@@ -172,66 +173,19 @@ const Footer = () => {
 	const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
 	const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
 
-	const list = [
-		{
-			name: 'BHD',
-			src: '/assets/img/footer/partner/bhd.png',
-			link: 'https://www.bhdstar.vn/',
-		},
-		{
-			name: 'CGV',
-			src: '/assets/img/footer/partner/cgv.png',
-			link: 'https://www.bhdstar.vn/',
-		},
-		{
-			name: 'Galaxy Cinema',
-			src: '/assets/img/footer/partner/galaxycine.png',
-			link: 'https://www.galaxycine.vn/',
-		},
-		{
-			name: 'Lotte Cinema',
-			src: '/assets/img/footer/partner/bhd.png',
-			link: 'http://lottecinemavn.com/',
-		},
-		{
-			name: 'CineStar',
-			src: '/assets/img/footer/partner/cinestar.png',
-			link: 'http://cinestar.com.vn/',
-		},
-		{
-			name: 'MegaGS',
-			src: '/assets/img/footer/partner/megags.png',
-			link: 'https://www.megagscinemas.vn/',
-		},
-		{
-			name: 'Beta',
-			src: '/assets/img/footer/partner/bt.jpg',
-			link: 'https://www.betacineplex.vn/',
-		},
-		{
-			name: 'DDC',
-			src: '/assets/img/footer/partner/dongdacinema.png',
-			link: 'http://ddcinema.vn/',
-		},
-		{
-			name: 'Touch Cinema',
-			src: '/assets/img/footer/partner/touch.png',
-			link: 'https://touchcinema.com/',
-		},
-	];
 	return (
 		<>
 			<Grid
 				container
 				alignItems='flex-start'
-				{...(isXsDown && { spacing: 3 })}
+				{...(!isXsDown && { spacing: 3 })}
 				justify='center'
 				className='spacing'
 			>
 				<Grid
 					item
 					xs={12}
-					sm={4}
+					sm={5}
 					lg={4}
 					container
 					{...(isSmDown && { justify: 'center' })}
@@ -244,8 +198,8 @@ const Footer = () => {
 					/>
 				</Grid>
 				<Hidden smDown>
-					<Grid item xs={12} sm={4} lg={4} container>
-						{renderPartner(list)}
+					<Grid item md={4} lg={4} container>
+						{renderPartner()}
 					</Grid>
 				</Hidden>
 

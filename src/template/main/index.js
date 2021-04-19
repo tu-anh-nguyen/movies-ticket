@@ -6,7 +6,17 @@ const Layout = (props) => {
 	return (
 		<>
 			<Header />
-			<main style={{ marginTop: '60px' }}>{props.children}</main>
+			<Box
+				css={{
+					backgroundImage: 'url(/assets/img/bg-details.jpg)',
+					backgroundSize: 'cover',
+					backgroundRepeat: 'repeat-y',
+					backgroundPosition: 'fixed',
+					marginTop: '60px',
+				}}
+			>
+				{props.children}
+			</Box>
 			<Box css={{ backgroundColor: '#222222' }}>
 				<Container maxWidth='md'>
 					<Footer />

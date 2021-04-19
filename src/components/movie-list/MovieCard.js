@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player';
 import { makeStyles, Dialog, Typography, Zoom } from '@material-ui/core';
 import format from 'date-format';
 import { Button } from '../../lib/ui';
+import { NavLink } from 'react-router-dom';
 
 const useStyle = makeStyles(() => ({
 	modal: {
@@ -146,6 +147,13 @@ const useStyle = makeStyles(() => ({
 		top: '0',
 		left: '0',
 	},
+	navLink: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		width: '100%',
+		height: '100%',
+	},
 	playIcon: {
 		transition: 'all 0.5s',
 		height: 'auto',
@@ -156,6 +164,7 @@ const useStyle = makeStyles(() => ({
 		transform: 'translate(-50%, -50%)',
 		display: 'block',
 		margin: 'auto',
+		zIndex: 2,
 		'&:hover': {
 			cursor: 'pointer',
 			opacity: 0.8,
@@ -256,6 +265,7 @@ const RenderMovieCard = (
 								className={classes.playIcon}
 								onClick={() => setOpen(true)}
 							/>
+							<NavLink to={`/movie/${maPhim}`} className={classes.navLink} />
 						</div>
 					</div>
 					{dangChieu && (

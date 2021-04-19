@@ -10,7 +10,7 @@ function ButtonComponent(props) {
 		padding = '10px 0',
 		margin,
 		textTransform = 'none',
-		boxShadow,
+		boxShadow = 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
 		borderRadius = '6px',
 		background,
 		backgroundHover,
