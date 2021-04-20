@@ -4,14 +4,8 @@ import format from 'date-format';
 import './style.scss';
 import { Button } from '../../lib/ui';
 
-function ContentInfo({
-	tenPhim,
-	hinhAnh,
-	biDanh,
-	moTa,
-	ngayKhoiChieu,
-	danhGia,
-}) {
+function MovieDetail({ data }) {
+	const { tenPhim, hinhAnh, biDanh, moTa, ngayKhoiChieu, danhGia } = data;
 	return (
 		<Grid
 			container
@@ -75,9 +69,5 @@ function ContentInfo({
 			</Grid>
 		</Grid>
 	);
-}
-
-function MovieDetail({ data = {} }) {
-	return <>{ContentInfo(data)}</>;
 }
 export default MovieDetail;

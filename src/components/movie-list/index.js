@@ -43,11 +43,11 @@ const MovieList = ({ data, nowShowing = true }) => {
 	const settings = {
 		infinite: true,
 		speed: 500,
-		slidesToShow: 1,
+		slidesToShow: 3,
 		arrows: true,
-		rows: 2,
-		slidesPerRow: 4,
+		centerMode: true,
 		slidesToScroll: 1,
+		centerPadding: '20px',
 		nextArrow: <SamplePrevArrow />,
 		prevArrow: <SamplePrevArrow />,
 	};

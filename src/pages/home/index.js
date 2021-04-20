@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Box, Container } from '@material-ui/core';
-import { Carousel, MovieList, HomeTool } from '../../components';
+import { Carousel, MovieList, HomeTool, CinemaList } from '../../components';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import MovieAction from '../../redux/action/movie';
 
@@ -14,7 +14,7 @@ function HomePage() {
 	console.log(movieList);
 	return (
 		<Box className='home'>
-			<Carousel />
+			{/* <Carousel />
 			<Box position='relative' paddingBottom='3rem'>
 				<HomeTool />
 			</Box>
@@ -22,18 +22,25 @@ function HomePage() {
 				<Container maxWidth='md'>
 					<MovieList data={movieList} />
 				</Container>
-			</Box>
+			</Box> */}
 			<Box
 				id='cum-rap'
-				style={{
-					height: '1000px',
-					backgroundColor: 'yellow',
-					opacity: '0.3',
+				minHeight='1000px'
+				padding='5rem 0'
+				css={{
+					backgroundColor: '#ffff004f',
 				}}
-			></Box>
+			>
+				<Container maxWidth='lg'>
+					<CinemaList />
+				</Container>
+			</Box>
 			<Box
 				id='tin-tuc'
-				style={{ height: '1000px', backgroundColor: 'green', opacity: '0.3' }}
+				style={{
+					height: '1000px',
+					backgroundColor: '#80003233',
+				}}
 			></Box>
 		</Box>
 	);
