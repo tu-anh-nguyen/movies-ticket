@@ -11,10 +11,12 @@ function Detail() {
 	const { movieId: maPhim } = useParams();
 	useEffect(() => {
 		dispatch(MovieAction.fetchDetail({ maPhim }));
-	}, [dispatch, maPhim]);
-	if (movieDetail.length === 0) return <p>Loading..</p>;
+	}, []);
+	console.log({ maPhim: JSON.parse(maPhim) });
+	console.log({ movieDetail: movieDetail.maPhim });
+	if (movieDetail.maPhim !== JSON.parse(maPhim)) return <p>Loading..</p>;
 	return (
-		<Box className='home'>
+		<Box padding='5rem 0'>
 			<Container maxWidth='md'>
 				<MovieDetail data={movieDetail} />
 			</Container>

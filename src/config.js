@@ -1,4 +1,4 @@
-import { Detail, Home, Login, Register } from './pages';
+import { Booking, Detail, Home, Login, Register } from './pages';
 
 export const mainRouter = [
 	{
@@ -8,8 +8,13 @@ export const mainRouter = [
 	},
 	{
 		path: '/movie/:movieId',
-		exact: true,
+		exact: false,
 		Component: Detail,
+	},
+	{
+		path: '/booking/:movieId',
+		exact: false,
+		Component: Booking,
 	},
 ];
 export const adminRouter = [];

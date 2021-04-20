@@ -52,9 +52,8 @@ export default function Booking() {
 		});
 	};
 	useEffect(() => {
-		dispatch(BookingAction.fetchChairList(maLichChieu));
+		dispatch(BookingAction.fetchBooking(maLichChieu));
 	}, []);
-	console.log({ chairList });
 	return (
 		<div>
 			<h1>Phòng Ghế</h1>
