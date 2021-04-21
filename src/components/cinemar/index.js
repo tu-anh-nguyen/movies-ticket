@@ -1,25 +1,32 @@
-import React, { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core';
-import { system, cineplex } from './data';
+import { cineplex } from './data';
 import './style.scss';
-function renderCineplexList(list = system) {
+function renderChainList({ list, setChainId }) {
 	return (
-		<Box display='flex' width='100%' padding='1rem 0' alignItems='center'>
+		<Box
+			display='flex'
+			flexDirection='column'
+			width='100%'
+			padding='1rem 0'
+			alignItems='center'
+		>
 			{list.map((item, index) => (
-				<Grid item>
+				<Grid item key={item.maHeThongRap}>
 					<img
 						className='cinema-logo-cineplex'
 						src={item.logo}
 						alt={item.biDanh}
-						key={index}
-						onClick={() => console.log({ item })}
+						onClick={() => setChainId(item.maHeThongRap)}
 					/>
 				</Grid>
 			))}
 		</Box>
 	);
 }
-function renderCinemaList(list = cineplex) {
+
+function renderCineplexList({ list, setCineplex }) {
 	const temp = Math.floor(Math.random() * 2) + 1;
 	let id = 0;
 	return list.map((item, index) => (
@@ -30,10 +37,7 @@ function renderCinemaList(list = cineplex) {
 			marginLeft='1rem'
 			alignItems='center'
 			borderLeft='1px solid'
-			onClick={() => {
-				id = index;
-				console.log({ id });
-			}}
+			onClick={() => setCineplex(item.maCumRap)}
 			{...(id === index ? { css: { opacity: 1 } } : { css: { opacity: 0.5 } })}
 		>
 			<Box>
@@ -84,15 +88,27 @@ function renderCinemaList(list = cineplex) {
 		</Box>
 	));
 }
+function CinemaList({ data = cineplex }) {
+	const [cineplexList, setCineplexList] = useState(data[0].lstCumRap);
+	const [filmList, setFilmList] = useState(cineplexList[0].danhSachPhim);
 
-function CinemaList() {
+	const [chainId, setChainId] = useState(data[0].maHeThongRap);
+	const [cineplexId, setCineplexId] = useState(cineplexList[0].maCumRap);
+
+	useEffect(() => {
+		const temp = Object.values(data).find(
+			(item) => item.maHeThongRap === chainId
+		);
+		setCineplexList(temp);
+	}, [chainId]);
+	console.log({ cineplexList });
 	return (
 		<Grid container justify='center'>
 			<Grid item xs={12} md={1} justify='center'>
-				{renderCineplexList()}
+				{renderChainList(data, setChainId)}
 			</Grid>
 			<Grid item xs={12} sm={6} md={5} lg={4}>
-				{renderCinemaList()}
+				{renderCineplexList(cineplexList, setCineplexId)}
 			</Grid>
 			<Grid item xs={12} sm={6} lg={7} />
 		</Grid>
