@@ -3,6 +3,7 @@ import { Box, Container } from '@material-ui/core';
 import { Carousel, MovieList, HomeTool, CinemaList } from '../../components';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import MovieAction from '../../redux/action/movie';
+import TheaterAction from '../../redux/action/theater';
 
 function HomePage() {
 	const movieList = useSelector((state) => state.movie.list);
@@ -46,4 +47,4 @@ function HomePage() {
 	);
 }
 
-export default connect()(HomePage);
+export default HomePage;
