@@ -1,0 +1,51 @@
+.cinema-logo-cineplex {
+    width: 80%;
+    max-width: 100px;
+    display: block;
+    margin: 0.5rem auto;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    opacity: 0.5;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.cinema-logo-cinema {
+    width: 3vh;
+    max-width: 80px;
+    min-width: 60px;
+    display: block;
+    border-radius: 10%;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.cinema-cinema-preCode {
+    border-radius: 15%;
+    background-color: #1aa3ff    ;
+    padding: 0.25rem 1rem !important;
+    color: white !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.cinema-cinema-name {
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    color:  #002db3 !important;
+}
+
+.cinema-cinema-address{
+    padding-top: 0.2rem !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem !important;
+}
+
+.cinema-cinema-map{
+    font-weight: 700;
+    color: red;
+    &:hover {
+        color: #a00b0b;
+        cursor: pointer;
+    }
+}

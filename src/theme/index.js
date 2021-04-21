@@ -2,9 +2,7 @@ import { createMuiTheme } from '@material-ui/core';
 
 const theme = createMuiTheme({
 	typography: {
-		// fontFamily: [
-		//     'Quicksand', 'sans-serif',
-		// ].join(','),
+		fontFamily: 'Quicksand',
 		fontWeightLight: 100,
 		fontWeightRegular: 400,
 		fontWeightMedium: 600,

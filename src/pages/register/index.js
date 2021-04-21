@@ -204,7 +204,7 @@ export default function RegisterPage() {
 					padding='20px 38px'
 				>
 					<Box className={classes.headerButton}>Đăng Ký</Box>
-					<Link className={classes.headerButtonPrimary} to='/dang-nhap/'>
+					<Link className={classes.headerButtonPrimary} to='/login/'>
 						Đăng Nhập
 					</Link>
 				</Box>

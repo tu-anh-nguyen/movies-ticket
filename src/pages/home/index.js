@@ -1,49 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Container } from '@material-ui/core';
+import { Carousel, MovieList, HomeTool, CinemaList } from '../../components';
+import { useSelector, useDispatch, connect } from 'react-redux';
+import MovieAction from '../../redux/action/movie';
 
-import NavHeader from '../../components/header';
-import MyCarousel from '../../components/carousel';
-import HomeTool from '../../components/home-tool';
-import MovieList from '../../components/movie-list';
-
-export default function HomePage() {
-	const [currentLocation, setCurrentLocation] = React.useState('Hồ Chí Minh');
-	const isLogin = false;
-
+function HomePage() {
+	const movieList = useSelector((state) => state.movie.list);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(MovieAction.fetchList());
+	}, [dispatch]);
+	if (movieList.length === 0) return <p>Loading..</p>;
+	console.log(movieList);
 	return (
 		<Box className='home'>
-			<NavHeader
-				isLogin={isLogin}
-				currentLocation={currentLocation}
-				setCurrentLocation={setCurrentLocation}
-			/>
-			<Box marginTop='60px'></Box>
-
-			<MyCarousel />
-			<Box position='relative'>
+			{/* <Carousel />
+			<Box position='relative' paddingBottom='3rem'>
 				<HomeTool />
 			</Box>
-			<Box id='lich-chieu' paddingTop='100px'>
+			<Box id='lich-chieu'>
 				<Container maxWidth='md'>
-					<MovieList />
+					<MovieList data={movieList} />
+				</Container>
+			</Box> */}
+			<Box
+				id='cum-rap'
+				minHeight='1000px'
+				padding='5rem 0'
+				css={{
+					backgroundColor: '#ffff004f',
+				}}
+			>
+				<Container maxWidth='lg'>
+					<CinemaList />
 				</Container>
 			</Box>
 			<Box
-				id='cum-rap'
+				id='tin-tuc'
 				style={{
 					height: '1000px',
-					backgroundColor: 'yellow',
-					opacity: '0.3',
+					backgroundColor: '#80003233',
 				}}
-			></Box>
-			<Box
-				id='tin-tuc'
-				style={{ height: '1000px', backgroundColor: 'green', opacity: '0.3' }}
-			></Box>
-			<Box
-				id='ung-dung'
-				style={{ height: '1000px', backgroundColor: 'blue', opacity: '0.3' }}
 			></Box>
 		</Box>
 	);
 }
+
+export default connect()(HomePage);

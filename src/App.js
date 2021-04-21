@@ -1,38 +1,43 @@
+/* eslint-disable no-unused-vars */
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import HomePage from './pages/home';
-import LoginPage from './pages/login';
-import RegisterPage from './pages/register';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './theme';
+import { RouteAdmin, RouteMain, RouteUser } from './template';
+import { adminRouter, mainRouter, userRouter } from './config';
+
+function renderMainRouter(listRouter) {
+	return listRouter.map((router, index) => {
+		return <RouteMain {...router} key={index} />;
+	});
+}
+function renderAdminRouter(listRouter) {
+	return listRouter.map((router, index) => {
+		return <RouteAdmin {...router} key={index} />;
+	});
+}
+
+function renderUserRouter(listRouter) {
+	return listRouter.map((router, index) => {
+		return <RouteUser {...router} key={index} />;
+	});
+}
 
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<Router>
-				<div className='App'>
-					<Switch>
-						<Route path='/' exact component={Home} />
-						<Route path='/dang-nhap/' exact component={Login} />
-						<Route path='/dang-ky/' exact component={Register} />
-					</Switch>
-				</div>
+				<Switch>
+					{renderMainRouter(mainRouter)}
+					{/* {renderAdminRouter(adminRouter)} */}
+					{renderUserRouter(userRouter)}
+				</Switch>
 			</Router>
 		</ThemeProvider>
 	);
 }
 
 export default App;
-
-function Home() {
-	return <HomePage />;
-}
-
-function Login() {
-	return <LoginPage />;
-}
-
-function Register() {
-	return <RegisterPage />;
-}

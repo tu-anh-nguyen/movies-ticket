@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -120,7 +120,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavHeader(props) {
 	const classes = useStyles();
-	const { isLogin, currentLocation, setCurrentLocation } = props;
+	const [currentLocation, setCurrentLocation] = useState('Hồ Chí Minh');
+	const isLogin = false;
 	const [isShowLocationList, setIsShowLocationList] = React.useState(false);
 	const [
 		isShowLocationListMobile,
@@ -251,7 +252,7 @@ export default function NavHeader(props) {
 							</Box>
 						)}
 						{!isLogin && (
-							<Link className={classes.userLoginLink} to='/dang-nhap/'>
+							<Link className={classes.userLoginLink} to='/login/'>
 								<Avatar
 									className={classes.userLoginAvatar}
 									alt='User avatar'

@@ -1,7 +1,10 @@
-import { makeStyles, Dialog, Modal, Typography, Zoom } from '@material-ui/core';
-import { Button } from '../../lib/ui';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
+import { makeStyles, Dialog, Typography, Zoom } from '@material-ui/core';
+import format from 'date-format';
+import { Button } from '../../lib/ui';
+import { NavLink } from 'react-router-dom';
 
 const useStyle = makeStyles(() => ({
 	modal: {
@@ -117,6 +120,7 @@ const useStyle = makeStyles(() => ({
 		transition: 'all 0.5s',
 		textOverflow: 'ellipsis',
 		whiteSpace: 'nowrap',
+		textAlign: 'center',
 		overflow: 'hidden',
 	},
 	imgContent: {
@@ -143,6 +147,13 @@ const useStyle = makeStyles(() => ({
 		top: '0',
 		left: '0',
 	},
+	navLink: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		width: '100%',
+		height: '100%',
+	},
 	playIcon: {
 		transition: 'all 0.5s',
 		height: 'auto',
@@ -153,6 +164,7 @@ const useStyle = makeStyles(() => ({
 		transform: 'translate(-50%, -50%)',
 		display: 'block',
 		margin: 'auto',
+		zIndex: 2,
 		'&:hover': {
 			cursor: 'pointer',
 			opacity: 0.8,
@@ -165,17 +177,7 @@ const useStyle = makeStyles(() => ({
 }));
 
 const RenderMovieCard = (
-	{
-		maPhim,
-		tenPhim,
-		biDanh,
-		trailer,
-		hinhAnh,
-		moTa,
-		maNhom,
-		ngayKhoiChieu,
-		danhGia,
-	},
+	{ maPhim, tenPhim, trailer, ngayKhoiChieu, hinhAnh, danhGia },
 	dangChieu = true
 ) => {
 	const classes = useStyle();
@@ -184,10 +186,9 @@ const RenderMovieCard = (
 		setOpen(false);
 	};
 
-	const renderCredit = (star) => {
+	const renderCredit = () => {
 		// const rand = star % 3;
 		const rand = Math.floor(Math.random() * 4) + 1;
-		console.log({ rand });
 		if (rand === 1) return <div className={classes.blockbuster} />;
 		if (rand === 2) return <div className={classes.sale} />;
 		if (rand === 3) return <div className={classes.earlyBird} />;
@@ -199,12 +200,12 @@ const RenderMovieCard = (
 		const arr = new Array(a).fill('a');
 		return (
 			<div style={{ fontSize: '0.5em' }}>
-				<>
+				<div>
 					{arr.map((element, index) => (
 						<span key={index}>⭐</span>
 					))}
 					{b && <span>½</span>}
-				</>
+				</div>
 			</div>
 		);
 	};
@@ -230,7 +231,6 @@ const RenderMovieCard = (
 					/>
 				</div>
 			</Dialog>
-
 			<div className={classes.root}>
 				{renderCredit(danhGia)}
 				<div className={classes.star}>
@@ -244,16 +244,16 @@ const RenderMovieCard = (
 						</div>
 					</div>
 					<div className={classes.bottomContent}>
-						<Typography className={classes.Typography}>
+						<div className={classes.Typography}>
 							{tenPhim}
 							<Typography
 								component='p'
 								variant='caption'
 								className={classes.filmStats}
 							>
-								{danhGia} IMDb
+								{format('dd-MM-yyyy', new Date(ngayKhoiChieu))}
 							</Typography>
-						</Typography>
+						</div>
 					</div>
 				</div>
 				<div className={classes.overlayContent}>
@@ -265,6 +265,7 @@ const RenderMovieCard = (
 								className={classes.playIcon}
 								onClick={() => setOpen(true)}
 							/>
+							<NavLink to={`/movie/${maPhim}`} className={classes.navLink} />
 						</div>
 					</div>
 					{dangChieu && (
@@ -285,3 +286,10 @@ const RenderMovieCard = (
 };
 
 export default RenderMovieCard;
+RenderMovieCard.propTypes = {
+	maPhim: PropTypes.string,
+	tenPhim: PropTypes.string,
+	trailer: PropTypes.string,
+	hinhAnh: PropTypes.string,
+	danhGia: PropTypes.string,
+};
