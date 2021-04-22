@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 import { makeStyles, Dialog, Typography, Zoom } from '@material-ui/core';
 import format from 'date-format';
 import { Button } from '../../lib/ui';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 const useStyle = makeStyles(() => ({
 	modal: {
@@ -285,7 +285,7 @@ const RenderMovieCard = (
 	);
 };
 
-export default RenderMovieCard;
+export default withRouter(RenderMovieCard);
 RenderMovieCard.propTypes = {
 	maPhim: PropTypes.string,
 	tenPhim: PropTypes.string,

@@ -15,7 +15,7 @@ function HomePage() {
 	console.log(movieList);
 	return (
 		<Box className='home'>
-			{/* <Carousel />
+			<Carousel />
 			<Box position='relative' paddingBottom='3rem'>
 				<HomeTool />
 			</Box>
@@ -23,16 +23,16 @@ function HomePage() {
 				<Container maxWidth='md'>
 					<MovieList data={movieList} />
 				</Container>
-			</Box> */}
+			</Box>
 			<Box
 				id='cum-rap'
 				minHeight='1000px'
 				padding='5rem 0'
 				css={{
-					backgroundColor: '#ffff004f',
+					backgroundColor: 'rgb(222 178 245 / 54%)',
 				}}
 			>
-				<Container maxWidth='lg'>
+				<Container maxWidth='lg' height={1000}>
 					<CinemaList />
 				</Container>
 			</Box>

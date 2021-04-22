@@ -1,122 +1,67 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core';
 import './style.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import TheaterAction from '../../redux/action/theater';
-function renderChainList(list, setChainId) {
-	return (
-		<Box
-			display='flex'
-			flexDirection='column'
-			width='100%'
-			padding='1rem 0'
-			alignItems='center'
-		>
-			{list?.map((item, index) => (
-				<Grid item key={item.maHeThongRap}>
-					<img
-						className='cinema-logo-cineplex'
-						src={item.logo}
-						alt={item.biDanh}
-						onClick={() => setChainId(item.maHeThongRap)}
-					/>
-				</Grid>
-			))}
-		</Box>
-	);
-}
+import ChainList from './chainList';
+import CineplexList from './cineplex';
+import FilmList from './filmList';
 
-function renderCineplexList(list, setCineplex) {
-	const temp = Math.floor(Math.random() * 2) + 1;
-	let id = 0;
-	return list?.map((item, index) => (
-		<Box
-			display='flex'
-			width='100%'
-			padding='1rem 0 1rem 1rem'
-			marginLeft='1rem'
-			alignItems='center'
-			key={item.maCumRap}
-			borderLeft='1px solid'
-			onClick={() => setCineplex(item.maCumRap)}
-			{...(id === index ? { css: { opacity: 1 } } : { css: { opacity: 0.5 } })}
-		>
-			<Box>
-				<img
-					className='cinema-logo-cinema'
-					src={`/assets/img/cinema/${temp}${
-						Math.floor(Math.random() * 6) + 1
-					}.png`}
-					alt={item.biDanh}
-					onClick={() => console.log({ item })}
-				/>
-			</Box>
-			<Box paddingLeft={4} textOverflow='ellipsis' overflow='hidden'>
-				<Typography
-					className='cinema-cinema-preCode'
-					component='span'
-					noWrap
-					variant='inherit'
-				>
-					{item.tenCumRap.slice(0, item.tenCumRap.indexOf('-') - 1)}
-				</Typography>
-				<Typography
-					className='cinema-cinema-name'
-					component='span'
-					noWrap
-					variant='inherit'
-				>
-					{item.tenCumRap.slice(item.tenCumRap.indexOf('-') + 1)}
-				</Typography>
-				<Typography
-					className='cinema-cinema-address'
-					component='p'
-					noWrap
-					variant='body2'
-				>
-					{item.diaChi}
-				</Typography>
-				<Typography
-					className='cinema-cinema-map'
-					component='a'
-					noWrap
-					variant='button'
-				>
-					Google map..
-				</Typography>
-			</Box>
-		</Box>
-	));
-}
 function CinemaList() {
 	const dispatch = useDispatch();
 	const { showingTimeList: data } = useSelector((state) => state.theater);
-	// const [cineplexList, setCineplexList] = useState(data[0]?.lstCumRap || []);
-	// const [filmList, setFilmList] = useState(cineplexList[0]?.danhSachPhim || []);
+	const [chainId, setChainId] = useState();
+	const [cineplexList, setCineplexList] = useState([]);
+	const [cineplexId, setCineplexId] = useState();
+	const [filmList, setFilmList] = useState();
 
-	// const [chainId, setChainId] = useState(data[0]?.maHeThongRap);
-	// const [cineplexId, setCineplexId] = useState(cineplexList[0]?.maCumRap);
-	// useEffect(() => {
-	// 	const temp = Object.values(data).find(
-	// 		(item) => item.maHeThongRap === chainId
-	// 	);
-	// 	setCineplexList(temp);
-	// }, [chainId]);
+	/** Fetch data showing time */
 	useEffect(() => {
 		dispatch(TheaterAction.fetchShowTimeCinema());
 	}, []);
-	console.log({ data });
-	// console.log({ cineplexList });
+
+	/** Select first cinema chain and cineplex */
+	useEffect(() => {
+		setChainId(data[0].maHeThongRap);
+		setCineplexList(data[0].lstCumRap);
+	}, [data]);
+
+	/** Set cineplex when select chainId */
+	useEffect(() => {
+		const tempCineplex = data.find(
+			(element) => element.maHeThongRap === chainId
+		);
+		console.log({ tempCineplex });
+		setCineplexId(tempCineplex?.lstCumRap[0].maCumRap);
+		setCineplexList(tempCineplex?.lstCumRap);
+	}, [chainId]);
+	useEffect(() => {
+		const tempCinema = cineplexList.find(
+			(element) => element.maCumRap === cineplexId
+		);
+		console.log({ tempCinema });
+		setFilmList(tempCinema?.danhSachPhim);
+	}, [cineplexId]);
+	console.log({ filmList });
 	return (
-		<Grid container justify='center'>
-			<Grid item xs={12} md={1} justify='center'>
-				{renderChainList(data)}
+		<Grid container justify='center' spacing={4} className='spacing'>
+			<Grid item xs={12} md={1}>
+				<ChainList list={data} setChainId={setChainId} chainId={chainId} />
 			</Grid>
 			<Grid item xs={12} sm={6} md={5} lg={4}>
-				{/* {renderCineplexList(cineplexList, setCineplexId)} */}
+				{cineplexList && (
+					<CineplexList
+						list={cineplexList}
+						setCineplexId={setCineplexId}
+						cineplexId={cineplexId}
+					/>
+				)}
 			</Grid>
-			<Grid item xs={12} sm={6} lg={7} />
+			<Grid item xs={12} sm={6} lg={7}>
+				{filmList && <FilmList list={filmList} />}
+			</Grid>
 		</Grid>
 	);
 }

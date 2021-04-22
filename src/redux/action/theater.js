@@ -1,4 +1,3 @@
-import BookingApi from '../api/booking';
 import TheaterApi from '../api/theater';
 import { GET_SHOWING_TIME_LIST } from '../constant/theater';
 

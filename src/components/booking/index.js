@@ -36,7 +36,7 @@ export default function Booking() {
 		}
 	};
 	const handleChoice = (maGhe) => {
-		dispatch({ type: 'CHOICE_CHAIR', payload: maGhe });
+		dispatch({ type: 'CHOICE_CHAIR', data: maGhe });
 	};
 	const renderChairList = () => {
 		return chairList.map((chair, index) => {

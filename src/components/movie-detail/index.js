@@ -6,6 +6,8 @@ import { Button } from '../../lib/ui';
 
 function MovieDetail({ data }) {
 	const { tenPhim, hinhAnh, biDanh, moTa, ngayKhoiChieu, danhGia } = data;
+	const imdb =
+		Math.round((7 + (3 * tenPhim.length) / (tenPhim.length + 10)) * 100) / 100;
 	return (
 		<Grid
 			container
@@ -52,12 +54,7 @@ function MovieDetail({ data }) {
 					</Grid>
 					<Grid item>
 						<Grid container alignItems='center'>
-							<Typography className='detail-imdbPoint'>
-								{danhGia % 10 === 0
-									? danhGia
-									: danhGia / (-(danhGia % 10) + 10 + danhGia)}{' '}
-								/ 10
-							</Typography>
+							<Typography className='detail-imdbPoint'>{imdb}</Typography>
 							<img
 								src='/assets/img/detail/imdb.png'
 								alt='imdb'

@@ -38,7 +38,7 @@ const renderCustomerService = () => (
 const renderContantUs = () => {
 	return (
 		<div className='root'>
-			<Grid container>
+			<Grid container justify='center'>
 				<Typography className='white title'>KẾT NỐI VỚI CHÚNG TÔI</Typography>
 			</Grid>
 			<Grid container alignItems='center' justify='space-evenly'>
@@ -77,7 +77,7 @@ const renderContantUs = () => {
 const renderApp = () => {
 	return (
 		<>
-			<Grid container>
+			<Grid container justify='center'>
 				<Typography className='white title'>Ứng dụng</Typography>
 			</Grid>
 			<Grid
@@ -185,8 +185,8 @@ const Footer = () => {
 				<Grid
 					item
 					xs={12}
-					sm={5}
-					lg={4}
+					sm={6}
+					md={4}
 					container
 					{...(isSmDown && { justify: 'center' })}
 				>
@@ -203,7 +203,7 @@ const Footer = () => {
 					</Grid>
 				</Hidden>
 
-				<Grid item xs={12} sm={4} lg={4} container>
+				<Grid item xs={12} sm={6} md={4} container justify='center'>
 					{renderContantUs()}
 					{renderApp()}
 				</Grid>
